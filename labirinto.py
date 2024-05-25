@@ -18,7 +18,7 @@ class Labirinto():
     def draw(self):
         self.colorecorridoi=(0,0,0)
         self.coloremuri=(0,0,255)
-        self.colorebordo=(0,0,0) #225 a centro
+        self.colorebordo=(0,0,0)
         for y, row in enumerate(self.game_map):
             for x, tile in enumerate(row):
                 if tile==1:
