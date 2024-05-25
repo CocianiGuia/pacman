@@ -1,6 +1,6 @@
 import pygame, sys
 from pygame.locals import *
-class Ball():
+class puntino():
     circle_color=(255,255,255)
     circle_size=(100,100)
     

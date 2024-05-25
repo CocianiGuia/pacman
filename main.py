@@ -1,7 +1,7 @@
 import pygame, sys
 from pygame.locals import *
 from labirinto import Labirinto
-
+from puntini import puntino
 
 window_size=(700,800)
 screenmenu=pygame.display.set_mode(window_size,0,32)
@@ -24,3 +24,4 @@ while True:
             
     pygame.display.update()
     clock.tick(60)
+
