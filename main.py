@@ -34,10 +34,9 @@ while True:
             pacman.move_up()
         if keys[K_DOWN]:
             pacman.move_down()
-
-        pacman.move()  
-        labirinto.draw()
+        pacman.move()
+        clock.tick(fps)  
         pacman.draw()
         
-    pygame.display.update()
-    clock.tick(60)
+    pygame.display.flip()
+    clock.tick(fps)
