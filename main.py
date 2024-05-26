@@ -1,7 +1,7 @@
 import pygame, sys
 from pygame.locals import *
 from labirinto import Labirinto
-
+from pacman import PacMan
 
 
 window_size=(700,800)
@@ -24,6 +24,20 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
-            
+        
+        keys = pygame.key.get_pressed()
+        if keys[K_RIGHT]:
+            pacman.move_right()
+        if keys[K_LEFT]:
+            pacman.move_left()
+        if keys[K_UP]:
+            pacman.move_up()
+        if keys[K_DOWN]:
+            pacman.move_down()
+
+        pacman.move()  
+        labirinto.draw()
+        pacman.draw()
+        
     pygame.display.update()
     clock.tick(60)
