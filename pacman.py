@@ -90,8 +90,8 @@ class PacMan:
                 self.vett_velocita[1]=0
 
     def draw(self,tempo=0):
-        for el in self.image:
-            el.fill(BLACK)
+        # for el in self.image:
+        #     el.fill(BLACK)
         self.counter=tempo%10
         if self.direzione=="RIGHT": 
             self.display.blit(self.image[self.counter//5],(self.rect.x,self.rect.y))
