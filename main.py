@@ -37,6 +37,11 @@ while True:
         pacman.move()
         clock.tick(fps)  
         pacman.draw()
+        pacman.move()# per aggiornare la posizione del pacman   
+        screengioco.fill("BLACK")# per pulire lo schermo e non fare la scia 
+        labirinto.draw()  
+        pacman.draw(pygame.time.get_ticks())
+        
         
     pygame.display.flip()
     clock.tick(fps)
