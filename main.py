@@ -3,6 +3,7 @@ from pygame.locals import *
 from labirinto import Labirinto
 
 
+
 window_size=(700,800)
 screenmenu=pygame.display.set_mode(window_size,0,32)
 screengioco=pygame.display.set_mode(window_size,0,32)
