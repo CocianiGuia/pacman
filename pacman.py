@@ -99,8 +99,7 @@ class PacMan:
             self.display.blit(pygame.transform.rotate(self.image[self.counter//5],90),(self.rect.x,self.rect.y))
         elif self.direzione=="DOWN": 
             self.display.blit(pygame.transform.rotate(self.image[self.counter//5],270),(self.rect.x,self.rect.y))
-
-
+        
         # if self.counter<19:
         #     self.counter+=1
         # else:
