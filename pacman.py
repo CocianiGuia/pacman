@@ -13,8 +13,8 @@ class PacMan:
         self.velocita_x=labirinto.tile_width/1
         self.velocita_y=labirinto.tile_height/1
         self.pos=[0,0]
-        self.pos[0]=8*labirinto.tile_width
-        self.pos[1]=8*labirinto.tile_height
+        self.pos[0]=17*labirinto.tile_width
+        self.pos[1]=17*labirinto.tile_height
         self.image=[]
         self.image.append(pygame.image.load('./immaginipacman/pacman1.png'))
         self.image[0]=pygame.transform.scale(self.image[0],self.size)
@@ -102,15 +102,15 @@ class PacMan:
             self.rect.left=3*self.labirinto.tile_width
 
     def draw(self,tempo=0):
-        self.counter=tempo%200
+        self.counter=tempo%100
         if self.direzione=="RIGHT": 
-            self.display.blit(self.image[floor(self.counter//100)],(self.rect.x,self.rect.y))
+            self.display.blit(self.image[floor(self.counter//50)],(self.rect.x,self.rect.y))
         elif self.direzione=="LEFT": 
-            self.display.blit(pygame.transform.flip(self.image[floor(self.counter//100)],True,False),(self.rect.x,self.rect.y))
+            self.display.blit(pygame.transform.flip(self.image[floor(self.counter//50)],True,False),(self.rect.x,self.rect.y))
         elif self.direzione=="UP": 
-            self.display.blit(pygame.transform.rotate(self.image[floor(self.counter//100)],90),(self.rect.x,self.rect.y))
+            self.display.blit(pygame.transform.rotate(self.image[floor(self.counter//50)],90),(self.rect.x,self.rect.y))
         elif self.direzione=="DOWN": 
-            self.display.blit(pygame.transform.rotate(self.image[floor(self.counter//100)],270),(self.rect.x,self.rect.y))
+            self.display.blit(pygame.transform.rotate(self.image[floor(self.counter//50)],270),(self.rect.x,self.rect.y))
         
         # if self.counter<19:
         #     self.counter+=1
