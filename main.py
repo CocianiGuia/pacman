@@ -16,7 +16,6 @@ fps=5 #non velocizzare il gioco se no non funziona bene (non prende gli incroci)
 
 labirinto=Labirinto(screen)
 labirinto.draw()
-
 # puntino=Puntino(screen,labirinto,1)
 
 pacman=PacMan(screen,labirinto)
