@@ -1,5 +1,7 @@
 import pygame, sys
 from pygame.locals import *
+from labirinto import Labirinto
+
 class Ball():
     circle_color=(255,255,255)
     circle_size=(100,100)
@@ -13,10 +15,4 @@ class Ball():
         self.rect.topleft = pos
     def draw(self):
         self.screen.blit(self.image, self.rect) #per visualizzare il disegno ad una certa posizione
-        
-
-
-
-
-    
-    
+            

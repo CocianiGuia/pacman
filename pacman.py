@@ -94,6 +94,12 @@ class PacMan:
                 self.rect.top=tile.bottom
                 collision_types['top']=True
                 self.vett_velocita[1]=0
+        
+        if self.rect.x<=3*self.labirinto.tile_width:
+            self.rect.right=30*self.labirinto.tile_width
+        
+        if self.rect.x>=30*self.labirinto.tile_width:
+            self.rect.left=3*self.labirinto.tile_width
 
     def draw(self,tempo=0):
         self.counter=tempo%200
