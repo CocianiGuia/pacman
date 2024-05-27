@@ -18,13 +18,16 @@ class Labirinto():
         self.tile_width = ceil(display.get_width() / self.num_cols)
         self.tile_height = ceil(display.get_height() / self.num_rows)
         
-        self.casella=pygame.Surface((self.tile_width,self.tile_height)) #definisco la casella in cui disegno il labirinto(rettangolo)
-                                                                        #prima lo disegnavamo volta per volta
+        self.casella=pygame.Surface((self.tile_width,self.tile_height)) #definisco la casella in cui disegno il labirinto(rettangolo) #prima lo disegnavamo volta per volta
+
+        self.tile_liberi=[]                                                        
         self.tile_rects = []
         for y, row in enumerate(self.game_map):
             for x, tile in enumerate(row):       #definisco dove pacman non può passare
                 if tile != 1:
                     self.tile_rects.append(pygame.Rect(x * self.tile_width, y * self.tile_height, self.tile_width, self.tile_height))
+                else:
+                    self.tile_liberi.append(pygame.Rect(x * self.tile_width, y * self.tile_height, self.tile_width, self.tile_height))
         
         # labirinto_img = pygame.image.load('./immagini/labirinto1.png')
         # self.labirinto_img = pygame.transform.scale(labirinto_img, (display.get_width(), display.get_height()))
