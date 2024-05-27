@@ -2,31 +2,38 @@ import pygame, sys
 from pygame.locals import *
 from labirinto import Labirinto
 from pacman import PacMan
+# from puntini import Puntino
 
-
+BLACK=(0,0,0)
 window_size=(700,800)
-screenmenu=pygame.display.set_mode(window_size,0,32)
-screengioco=pygame.display.set_mode(window_size,0,32)
+
+screen=pygame.display.set_mode(window_size,0,32)
 
 pygame.display.set_caption('Pac-Man')
 
 clock= pygame.time.Clock()
-fps=60
+fps=5 #non velocizzare il gioco se no non funziona bene (non prende gli incroci)
 
-labirinto=Labirinto(screengioco)
+labirinto=Labirinto(screen)
 labirinto.draw()
 
-pacman=PacMan(screengioco,labirinto,(labirinto.width/2,labirinto.height/2.05))
+# puntino=Puntino(screen,labirinto,1)
+
+pacman=PacMan(screen,labirinto)
 pacman.draw()
-    
-while True:
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
+
+
+def gioca(): 
+    while True:
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+
         
         keys = pygame.key.get_pressed()
-        if keys[K_RIGHT]:
+        if keys[K_RIGHT]: 
             pacman.move_right()
         if keys[K_LEFT]:
             pacman.move_left()
@@ -35,13 +42,22 @@ while True:
         if keys[K_DOWN]:
             pacman.move_down()
         pacman.move()
-        clock.tick(fps)  
-        pacman.draw()
-        pacman.move()# per aggiornare la posizione del pacman   
-        screengioco.fill("BLACK")# per pulire lo schermo e non fare la scia 
-        labirinto.draw()  
+        clock.tick(fps)   
+        # screen.fill("BLACK")# per pulire lo schermo e non fare la scia 
+        labirinto.draw()
+        # puntino.sceglirettangolo(pacman.rect)
         pacman.draw(pygame.time.get_ticks())
-        
-        
-    pygame.display.flip()
-    clock.tick(fps)
+        # puntino.draw()
+
+        pygame.display.flip()
+        clock.tick(fps)
+
+gioca()
+
+# while True:
+    #mettere la stampa della pagina del mio menu di avvio e le funzioni(es bottoni esci e gioca)
+    #quando premi il bottone gioca richiama la funzione gioca
+
+# def schermogameover(screengameover):
+#     while True:
+#         screengameover.fill()
