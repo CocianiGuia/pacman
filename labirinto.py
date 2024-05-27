@@ -47,3 +47,4 @@ class Labirinto():
                     self.display.blit(self.casella, (x*self.tile_width, y*self.tile_height)) 
 
             self.display.blit(self.labirinto_img, (0,0))
+            #non funzia
