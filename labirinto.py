@@ -35,15 +35,15 @@ class Labirinto():
     def draw(self):
         for y, row in enumerate(self.game_map):
             for x, tile in enumerate(row):
-                if tile==1:
+                if tile==0:
                     self.casella.fill(BLACK)
                     self.display.blit(self.casella, (x*self.tile_width, y*self.tile_height))
                     
-                if tile==0:
+                if tile==1:
                     self.casella.fill(BLUE)
                     self.display.blit(self.casella, (x*self.tile_width, y*self.tile_height))
-                if tile==2:
-                    self.casella.fill(WHITE)
-                    self.display.blit(self.casella, (x*self.tile_width, y*self.tile_height)) 
+                # if tile==2:
+                #     self.casella.fill(WHITE)
+                #     self.display.blit(self.casella, (x*self.tile_width, y*self.tile_height)) 
 
             self.display.blit(self.labirinto_img, (0,0))
