@@ -1,29 +1,35 @@
 import pygame, sys
 from pygame.locals import *
 from collisioni import *
+from math import floor
 
 BLACK=(0,0,0)
 
 class PacMan:
-    def __init__(self, display, labirinto, pos, tempo=0 ,velocita=4) ->None:
+    def __init__(self, display, labirinto) ->None:
         self.display=display
         self.labirinto=labirinto
         self.size=labirinto.tile_width, labirinto.tile_height
-        self.velocita=velocita
+        self.velocita_x=labirinto.tile_width/1
+        self.velocita_y=labirinto.tile_height/1
+        self.pos=[0,0]
+        self.pos[0]=17*labirinto.tile_width
+        self.pos[1]=17*labirinto.tile_height
         self.image=[]
         self.image.append(pygame.image.load('./immaginipacman/pacman1.png'))
         self.image[0]=pygame.transform.scale(self.image[0],self.size)
         self.image.append(pygame.image.load('./immaginipacman/pacman2.png'))
         self.image[1]=pygame.transform.scale(self.image[1],self.size)
-        self.rect = pygame.Rect(pos[0], pos[1], self.labirinto.tile_width, self.labirinto.tile_height)
+        self.rect = pygame.Rect(self.pos[0], self.pos[1], self.labirinto.tile_width, self.labirinto.tile_height)
         self.moving_right=False
         self.moving_left=False
         self.moving_up=False
         self.moving_down=False
         self.vett_velocita=[0,0]
         self.vecchie_collisioni={'top': False, 'bottom':False, 'right':False, 'left':False}
-        self.direzione=None  #in cui è rivolto pacman (in base a questo so di quanto girarlo quando si muove)
-        self.counter=tempo%10 #contatore che dice quanto spesso deve aprire e chiudere la bocca
+        self.direzione="UP"  #in cui è rivolto pacman (in base a questo so di quanto girarlo quando si muove)
+        self.counter=0 #contatore che dice quanto spesso deve aprire e chiudere la bocca
+
 
     def move_right(self):
         self.moving_right=True
@@ -53,19 +59,19 @@ class PacMan:
         collision_types= {'top': False, 'bottom':False,'right':False, 'left':False}
 
         if self.moving_right:
-            self.vett_velocita[0] = self.velocita
+            self.vett_velocita[0] = self.velocita_x
             self.vett_velocita[1]=0  #escludo movimento verticale
             self.direzione="RIGHT"
         elif self.moving_left:
-            self.vett_velocita[0]=-self.velocita
+            self.vett_velocita[0]=-self.velocita_x
             self.vett_velocita[1]=0
             self.direzione="LEFT"
         elif self.moving_up:
-            self.vett_velocita[1]=-self.velocita
+            self.vett_velocita[1]=-self.velocita_y
             self.vett_velocita[0]=0    #escludo movimento orizzontale
             self.direzione="UP"
         elif self.moving_down:
-            self.vett_velocita[1]=self.velocita
+            self.vett_velocita[1]=self.velocita_y
             self.vett_velocita[0]=0
             self.direzione="DOWN"
         
@@ -90,15 +96,15 @@ class PacMan:
                 self.vett_velocita[1]=0
 
     def draw(self,tempo=0):
-        self.counter=tempo%10
+        self.counter=tempo%200
         if self.direzione=="RIGHT": 
-            self.display.blit(self.image[self.counter//5],(self.rect.x,self.rect.y))
+            self.display.blit(self.image[floor(self.counter//100)],(self.rect.x,self.rect.y))
         elif self.direzione=="LEFT": 
-            self.display.blit(pygame.transform.flip(self.image[self.counter//5],True,False),(self.rect.x,self.rect.y))
+            self.display.blit(pygame.transform.flip(self.image[floor(self.counter//100)],True,False),(self.rect.x,self.rect.y))
         elif self.direzione=="UP": 
-            self.display.blit(pygame.transform.rotate(self.image[self.counter//5],90),(self.rect.x,self.rect.y))
+            self.display.blit(pygame.transform.rotate(self.image[floor(self.counter//100)],90),(self.rect.x,self.rect.y))
         elif self.direzione=="DOWN": 
-            self.display.blit(pygame.transform.rotate(self.image[self.counter//5],270),(self.rect.x,self.rect.y))
+            self.display.blit(pygame.transform.rotate(self.image[floor(self.counter//100)],270),(self.rect.x,self.rect.y))
         
         # if self.counter<19:
         #     self.counter+=1
