@@ -2,7 +2,7 @@ import pygame, sys
 from pygame.locals import *
 from labirinto import Labirinto
 from pacman import PacMan
-from puntini import Puntino
+# from puntini import Puntino
 
 BLACK=(0,0,0)
 window_size=(700,800)
@@ -16,10 +16,25 @@ fps=15 #non velocizzare il gioco se no non funziona bene (non prende gli incroci
 
 labirinto=Labirinto(screen)
 labirinto.draw()
-puntino=Puntino(screen,labirinto,1)
+# puntino=Puntino(screen,labirinto,1)
 
 pacman=PacMan(screen,labirinto)
 pacman.draw()
+
+def menu_iniziale():
+    intro=True:
+    while intro:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type==pygame.MOUSEBUTTONDOWN:
+                if button_rect.collidepoint(event.pos):
+                    print("PACMAN")
+        
+        screen.fill(BLACK)
+
+        draw_text('START', font, BLACK, screen, 1100//2, )
 
 
 def gioca(): 
@@ -44,9 +59,9 @@ def gioca():
         clock.tick(fps)   
         # screen.fill("BLACK")# per pulire lo schermo e non fare la scia 
         labirinto.draw()
-        puntino.sceglirettangolo(pacman.rect)
+        # puntino.sceglirettangolo(pacman.rect)
         pacman.draw(pygame.time.get_ticks())
-        puntino.draw()
+        # puntino.draw()
 
         pygame.display.flip()
         clock.tick(fps)

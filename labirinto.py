@@ -29,8 +29,8 @@ class Labirinto():
                 else:
                     self.tile_liberi.append(pygame.Rect(x * self.tile_width, y * self.tile_height, self.tile_width, self.tile_height))
         
-        # labirinto_img = pygame.image.load('./immagini/labirinto1.png')
-        # self.labirinto_img = pygame.transform.scale(labirinto_img, (display.get_width(), display.get_height()))
+        labirinto_img = pygame.image.load('./immagini/labirintoridimensionato.png')
+        self.labirinto_img = pygame.transform.scale(labirinto_img, (display.get_width(), display.get_height()))
 
     def draw(self):
         for y, row in enumerate(self.game_map):
@@ -46,5 +46,5 @@ class Labirinto():
                     self.casella.fill(WHITE)
                     self.display.blit(self.casella, (x*self.tile_width, y*self.tile_height)) 
 
-            # self.display.blit(self.labirinto_img, (0,0))
+            self.display.blit(self.labirinto_img, (0,0))
             
