@@ -1,13 +1,8 @@
 import pygame
 import sys
 from pygame.locals import *
-pygame.init() 
 from labirinto import Labirinto
-
 from pacman import PacMan
-from math import ceil
-# from ciliegia import Ciliegia
-
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -17,9 +12,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT), 0, 32)
 pygame.display.set_caption('Pac-Man')
 
 clock = pygame.time.Clock()
-fps = 15  # non velocizzare il gioco se no non funziona bene (non prende gli incroci)
-home=pygame.image.load('immaginimenù/schermata.png')
-home_schermata=screen.blit(home,(0,0))
+fps = 15  # Control the game speed
 
 def draw_text(text, font, color, surface, x, y):
     textobj = font.render(text, True, color)
@@ -52,7 +45,6 @@ def gioca():
     pacman = PacMan(screen, labirinto)
     run = True
     paused = False
-    score = 0
 
     while run:
         clock.tick(fps)
@@ -61,26 +53,27 @@ def gioca():
                 run = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
-                    pacman.directionirection = 'UP'
+                    pacman.direzione = 'UP'
                 elif event.key == pygame.K_DOWN:
-                    pacman.direction = 'DOWN'
+                    pacman.direzione = 'DOWN'
                 elif event.key == pygame.K_LEFT:
-                    pacman.direction = 'LEFT'
+                    pacman.direzione = 'LEFT'
                 elif event.key == pygame.K_RIGHT:
-                    pacman.direction = 'RIGHT'
+                    pacman.direzione = 'RIGHT'
                 elif event.key == pygame.K_p:
                     paused = not paused
 
         if not paused:
-            print(f"PacMan direction: {pacman.direzione}")  # Debug: stampa la direzione di PacMan
             pacman.move()
-            screen.fill(BLACK)  # Aggiunto per evitare la scia
+            screen.fill(BLACK)
             labirinto.draw()
             pacman.draw(pygame.time.get_ticks())
 
         pygame.display.flip()
-        clock.tick(fps)
+
+    pygame.quit()
 
 if __name__ == "__main__":
     menu_iniziale()
     gioca()
+
