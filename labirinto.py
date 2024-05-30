@@ -7,7 +7,7 @@ BLUE=(0,0,255)
 WHITE=(255,255,255)
 
 class Labirinto():
-    def __init__(self, display, filematrice= './mappa/mappa.finale.txt') -> None:
+    def __init__(self, display, filematrice= './mappa/mappalabirinto.txt') -> None:
         self.display=display
         self.width=display.get_width()
         self.height=display.get_height()
@@ -29,7 +29,7 @@ class Labirinto():
                 else:
                     self.tile_liberi.append(pygame.Rect(x * self.tile_width, y * self.tile_height, self.tile_width, self.tile_height))
         
-        labirinto_img = pygame.image.load('./immagini/labirinto1.png')
+        labirinto_img = pygame.image.load('./immagini/labirintoridimensionato.png')
         self.labirinto_img = pygame.transform.scale(labirinto_img, (display.get_width(), display.get_height()))
 
     def draw(self):
@@ -47,3 +47,4 @@ class Labirinto():
                 #     self.display.blit(self.casella, (x*self.tile_width, y*self.tile_height)) 
 
             self.display.blit(self.labirinto_img, (0,0))
+            

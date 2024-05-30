@@ -12,7 +12,7 @@ screen=pygame.display.set_mode(window_size,0,32)
 pygame.display.set_caption('Pac-Man')
 
 clock= pygame.time.Clock()
-fps=5 #non velocizzare il gioco se no non funziona bene (non prende gli incroci)
+fps=15 #non velocizzare il gioco se no non funziona bene (non prende gli incroci)
 
 labirinto=Labirinto(screen)
 labirinto.draw()
@@ -20,6 +20,21 @@ labirinto.draw()
 
 pacman=PacMan(screen,labirinto)
 pacman.draw()
+
+def menu_iniziale():
+    intro=True:
+    while intro:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type==pygame.MOUSEBUTTONDOWN:
+                if button_rect.collidepoint(event.pos):
+                    print("PACMAN")
+        
+        screen.fill(BLACK)
+
+        draw_text('START', font, BLACK, screen, 1100//2, )
 
 
 def gioca(): 
