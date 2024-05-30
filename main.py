@@ -2,7 +2,7 @@ import pygame, sys
 from pygame.locals import *
 from labirinto import Labirinto
 from pacman import PacMan
-# from puntini import Puntino
+from puntini import Puntino
 
 BLACK=(0,0,0)
 window_size=(700,800)
