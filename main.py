@@ -8,10 +8,6 @@ from pacman import PacMan
 from math import ceil
 # from ciliegia import Ciliegia
 
-WHITE=(255,255,255)
-BLACK=(0,0,0)
-window_size=(700,800)
-screen=pygame.display.set_mode(window_size,0,32)
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
