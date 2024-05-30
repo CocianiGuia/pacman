@@ -41,10 +41,6 @@ def schermatainiziale():
     home_schermata.blit(text, (245, 457))
 
 
-
-
-
-
 def gioca(): 
     while True:
 
@@ -71,8 +67,8 @@ def gioca():
         pacman.draw(pygame.time.get_ticks())
         # ciliegia.draw()
 
-    pygame.display.flip()
-    clock.tick(fps)
+        pygame.display.flip()
+        clock.tick(fps)
 
 schermatainiziale()
                 
