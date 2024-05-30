@@ -17,8 +17,8 @@ class Labirinto():
         self.casella = pygame.Surface((self.tile_width, self.tile_height))
         
         # Carica l'immagine del labirinto
-        labirinto_img = pygame.image.load(image_path)
-        self.labirinto_img = pygame.transform.scale(labirinto_img, (display.get_width(), display.get_height()))
+        # labirinto_img = pygame.image.load(image_path)
+        # self.labirinto_img = pygame.transform.scale(labirinto_img, (display.get_width(), display.get_height()))
 
     def draw(self):
         for y, row in enumerate(self.game_map):
