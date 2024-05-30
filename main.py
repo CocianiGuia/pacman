@@ -1,40 +1,39 @@
 import pygame, sys
 from pygame.locals import *
+pygame.init() 
 from labirinto import Labirinto
 from pacman import PacMan
-from puntini import Puntino
+# from ciliegia import Ciliegia
 
+WHITE=(255,255,255)
 BLACK=(0,0,0)
 window_size=(700,800)
-pygame.init() #modifica
 screen=pygame.display.set_mode(window_size,0,32)
 
 pygame.display.set_caption('Pac-Man')
 
 clock= pygame.time.Clock()
 fps=15 #non velocizzare il gioco se no non funziona bene (non prende gli incroci)
+home=pygame.image.load('immaginimenù/schermata.png')
+home_schermata=screen.blit(home,(0,0))
 
 labirinto=Labirinto(screen)
 labirinto.draw()
-# puntino=Puntino(screen,labirinto,1)
+# ciliegia=Ciliegia(screen,labirinto,1)
 
 pacman=PacMan(screen,labirinto)
 pacman.draw()
 
-def menu_iniziale():
-    intro=True:
-    while intro:
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type==pygame.MOUSEBUTTONDOWN:
-                if button_rect.collidepoint(event.pos):
-                    print("PACMAN")
-        
-        screen.fill(BLACK)
 
-        draw_text('START', font, BLACK, screen, 1100//2, )
+def schermatainiziale():
+    bottone=pygame.draw.rect(home_schermata, BLACK, [350, 400,260,40], 0, 5)
+    pygame.draw.rect(home_schermata, WHITE, [350,400,260,40], 5,5)
+    text=pygame.font.render('START', 1, WHITE) 
+    home_schermata.blit(text, (245, 457))
+
+
+
+
 
 
 def gioca(): 
@@ -59,14 +58,16 @@ def gioca():
         clock.tick(fps)   
         #screen.fill("BLACK")#per pulire lo schermo e non fare la scia 
         labirinto.draw()
-        # puntino.sceglirettangolo(pacman.rect)
+        # ciliegia.sceglirettangolo(pacman.rect)
         pacman.draw(pygame.time.get_ticks())
-        # puntino.draw()
+        # ciliegia.draw()
 
         pygame.display.flip()
         clock.tick(fps)
 
-gioca()
+schermatainiziale()
+                
+# gioca()
 
 # while True:
     #mettere la stampa della pagina del mio menu di avvio e le funzioni(es bottoni esci e gioca)

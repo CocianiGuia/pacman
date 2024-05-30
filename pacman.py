@@ -13,8 +13,8 @@ class PacMan:
         self.velocita_x=labirinto.tile_width/1
         self.velocita_y=labirinto.tile_height/1
         self.pos=[0,0]
-        self.pos[0]=8*labirinto.tile_width
-        self.pos[1]=8*labirinto.tile_height
+        self.pos[0]=17*labirinto.tile_width
+        self.pos[1]=17*labirinto.tile_height
         self.image=[]
         self.image.append(pygame.image.load('./immaginipacman/pacman1.png'))
         self.image[0]=pygame.transform.scale(self.image[0],self.size)
