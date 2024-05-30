@@ -1,77 +1,81 @@
-import pygame, sys
+import pygame
+import sys
 from pygame.locals import *
 from labirinto import Labirinto
 from pacman import PacMan
+from math import ceil
 # from puntini import Puntino
 
-BLACK=(0,0,0)
-window_size=(700,800)
-pygame.init() #modifica
-screen=pygame.display.set_mode(window_size,0,32)
-
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+WIDTH, HEIGHT = (700, 800)
+pygame.init()
+screen = pygame.display.set_mode((WIDTH, HEIGHT), 0, 32)
 pygame.display.set_caption('Pac-Man')
 
-clock= pygame.time.Clock()
-fps=15 #non velocizzare il gioco se no non funziona bene (non prende gli incroci)
+clock = pygame.time.Clock()
+fps = 15  # non velocizzare il gioco se no non funziona bene (non prende gli incroci)
 
-labirinto=Labirinto(screen)
-labirinto.draw()
-# puntino=Puntino(screen,labirinto,1)
-
-pacman=PacMan(screen,labirinto)
-pacman.draw()
+def draw_text(text, font, color, surface, x, y):
+    textobj = font.render(text, True, color)
+    textrect = textobj.get_rect()
+    textrect.center = (x, y)
+    surface.blit(textobj, textrect)
 
 def menu_iniziale():
-    intro=True:
+    intro = True
+    font = pygame.font.SysFont(None, 72)
+    button_rect = pygame.Rect(WIDTH // 2 - 100, HEIGHT // 2 - 50, 200, 100)
+    
     while intro:
         for event in pygame.event.get():
-            if event.type == QUIT:
+            if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type==pygame.MOUSEBUTTONDOWN:
+            if event.type == pygame.MOUSEBUTTONDOWN:
                 if button_rect.collidepoint(event.pos):
-                    print("PACMAN")
+                    intro = False
         
         screen.fill(BLACK)
+        draw_text('START', font, WHITE, screen, WIDTH // 2, HEIGHT // 2)
+        pygame.draw.rect(screen, WHITE, button_rect, 2)
+        pygame.display.flip()
+        clock.tick(fps)
 
-        draw_text('START', font, BLACK, screen, 1100//2, )
+def gioca():
+    labirinto = Labirinto(screen)
+    pacman = PacMan(screen, labirinto)
+    run = True
+    paused = False
+    score = 0
 
-
-def gioca(): 
-    while True:
-
+    while run:
+        clock.tick(fps)
         for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
+            if event.type == pygame.QUIT:
+                run = False
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    pacman.directionirection = 'UP'
+                elif event.key == pygame.K_DOWN:
+                    pacman.direction = 'DOWN'
+                elif event.key == pygame.K_LEFT:
+                    pacman.direction = 'LEFT'
+                elif event.key == pygame.K_RIGHT:
+                    pacman.direction = 'RIGHT'
+                elif event.key == pygame.K_p:
+                    paused = not paused
 
-        
-        keys = pygame.key.get_pressed()
-        if keys[K_RIGHT]: 
-            pacman.move_right()
-        if keys[K_LEFT]:
-            pacman.move_left()
-        if keys[K_UP]:
-            pacman.move_up()
-        if keys[K_DOWN]:
-            pacman.move_down()
-        pacman.move()
-        clock.tick(fps)   
-        #screen.fill("BLACK")#per pulire lo schermo e non fare la scia 
-        labirinto.draw()
-        # puntino.sceglirettangolo(pacman.rect)
-        pacman.draw(pygame.time.get_ticks())
-        # puntino.draw()
+        if not paused:
+            print(f"PacMan direction: {pacman.direzione}")  # Debug: stampa la direzione di PacMan
+            pacman.move()
+            screen.fill(BLACK)  # Aggiunto per evitare la scia
+            labirinto.draw()
+            pacman.draw(pygame.time.get_ticks())
 
         pygame.display.flip()
         clock.tick(fps)
 
-gioca()
-
-# while True:
-    #mettere la stampa della pagina del mio menu di avvio e le funzioni(es bottoni esci e gioca)
-    #quando premi il bottone gioca richiama la funzione gioca
-
-# def schermogameover(screengameover):
-#     while True:
-#         screengameover.fill()
+if __name__ == "__main__":
+    menu_iniziale()
+    gioca()
