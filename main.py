@@ -1,8 +1,13 @@
 import pygame
 import sys
 from pygame.locals import *
+from punteggio import Punti
 from labirinto import Labirinto
 from pacman import PacMan
+WHITE=(255,255,255)
+BLACK=(0,0,0)
+window_size=(700,800)
+screen=pygame.display.set_mode(window_size,0,32)
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -11,63 +16,49 @@ pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT), 0, 32)
 pygame.display.set_caption('Pac-Man')
 
-clock = pygame.time.Clock()
-fps = 15  # Control the game speed
+clock= pygame.time.Clock()
+fps=15 #Control the game speed
 
-def draw_text(text, font, color, surface, x, y):
-    textobj = font.render(text, True, color)
-    textrect = textobj.get_rect()
-    textrect.center = (x, y)
-    surface.blit(textobj, textrect)
+labirinto=Labirinto(screen)
+labirinto.draw()
+# ciliegia=Ciliegia(screen,labirinto,1)
 
-def menu_iniziale():
-    intro = True
-    font = pygame.font.SysFont(None, 72)
-    button_rect = pygame.Rect(WIDTH // 2 - 100, HEIGHT // 2 - 50, 200, 100)
-    
-    while intro:
+pacman=PacMan(screen,labirinto)
+pacman.draw()
+
+
+def schermatainiziale():
+    bottone=pygame.draw.rect(home_schermata, BLACK, [350, 400,260,40], 0, 5)
+    pygame.draw.rect(home_schermata, WHITE, [350,400,260,40], 5,5)
+    text=pygame.font.render('START', 1, WHITE) 
+    home_schermata.blit(text, (245, 457))
+
+
+def gioca(): 
+    while True:
+
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if button_rect.collidepoint(event.pos):
-                    intro = False
+
         
-        screen.fill(BLACK)
-        draw_text('START', font, WHITE, screen, WIDTH // 2, HEIGHT // 2)
-        pygame.draw.rect(screen, WHITE, button_rect, 2)
-        pygame.display.flip()
-        clock.tick(fps)
-
-def gioca():
-    labirinto = Labirinto(screen)
-    pacman = PacMan(screen, labirinto)
-    run = True
-    paused = False
-
-    while run:
-        clock.tick(fps)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
-                    pacman.direzione = 'UP'
-                elif event.key == pygame.K_DOWN:
-                    pacman.direzione = 'DOWN'
-                elif event.key == pygame.K_LEFT:
-                    pacman.direzione = 'LEFT'
-                elif event.key == pygame.K_RIGHT:
-                    pacman.direzione = 'RIGHT'
-                elif event.key == pygame.K_p:
-                    paused = not paused
-
-        if not paused:
-            pacman.move()
-            screen.fill(BLACK)
-            labirinto.draw()
-            pacman.draw(pygame.time.get_ticks())
+        keys = pygame.key.get_pressed()
+        if keys[K_RIGHT]: 
+            pacman.move_right()
+        if keys[K_LEFT]:
+            pacman.move_left()
+        if keys[K_UP]:
+            pacman.move_up()
+        if keys[K_DOWN]:
+            pacman.move_down()
+        pacman.move()
+        clock.tick(fps)   
+        #screen.fill("BLACK")#per pulire lo schermo e non fare la scia 
+        labirinto.draw()
+        # ciliegia.sceglirettangolo(pacman.rect)
+        pacman.draw(pygame.time.get_ticks())
+        # ciliegia.draw()
 
         pygame.display.flip()
 
