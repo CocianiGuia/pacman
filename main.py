@@ -6,7 +6,7 @@ from pacman import PacMan
 
 BLACK=(0,0,0)
 window_size=(700,800)
-
+pygame.init() #modifica
 screen=pygame.display.set_mode(window_size,0,32)
 
 pygame.display.set_caption('Pac-Man')
@@ -42,7 +42,7 @@ def gioca():
             pacman.move_down()
         pacman.move()
         clock.tick(fps)   
-        # screen.fill("BLACK")# per pulire lo schermo e non fare la scia 
+        #screen.fill("BLACK")#per pulire lo schermo e non fare la scia 
         labirinto.draw()
         # puntino.sceglirettangolo(pacman.rect)
         pacman.draw(pygame.time.get_ticks())
