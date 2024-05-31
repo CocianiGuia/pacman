@@ -17,7 +17,7 @@ screen=pygame.display.set_mode(window_size,0,32)
 pygame.display.set_caption('Pac-Man')
 
 clock= pygame.time.Clock()
-fps=15 #non velocizzare il gioco se no non funziona bene (non prende gli incroci)
+fps=30 #non velocizzare il gioco se no non funziona bene (non prende gli incroci)
 
 
 

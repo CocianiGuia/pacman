@@ -26,7 +26,7 @@ class Ciliegia():
                 while self.rect.colliderect(pacman):
                     f=random.randint(0,len(self.labirinto.tile_liberi)-1)
                     self.rect=self.labirinto.tile_liberi[f]
-                self.durata=150
+                self.durata=60
 
     def draw(self, pacman):
         if self.durata>0:
