@@ -17,6 +17,8 @@ pygame.display.set_caption('Pac-Man')
 clock= pygame.time.Clock()
 fps=15 #non velocizzare il gioco se no non funziona bene (non prende gli incroci)
 
+
+
 labirinto=Labirinto(screen)
 labirinto.draw()
 # ciliegia=Ciliegia(screen,labirinto,1)
