@@ -29,8 +29,8 @@ pacman.draw()
 punti_h = 60
 punti = Punti(screen, [0,0], [window_width, punti_h])
 
-icona=pygame.image.load("immaginimenù/icona.png")
-menu=pygame.image.load("immaginimenù/menu.png")
+icona=pygame.image.load("immaginimenu/icona.png")
+menu=pygame.image.load("immaginimenu/menu.png")
 listapuntini=[Puntino((x*labirinto.tile_width+10, y*labirinto.tile_height+10)) for y in range(labirinto.num_rows) for x in range(labirinto.num_cols)]
 
 # def main_menu():
@@ -95,6 +95,23 @@ def menu(screen):
             clock.tick(fps)
             pygame.display.flip()
 menu(screen)
+
+# game_over=pygame.image.load("./immaginimenu/immagine_gameover1.png")
+# def gameover(screen):
+#     screen.blit(game_over, (0,0))
+#     pygame.display.update()
+#     clock=pygame.time.Clock()
+#     ricomincia=False
+#     while not ricomincia:
+#         for event in pygame.event.get():
+#             if event.type==pygame.KEYDOWN and event.key==pygame.K_SPACE:
+#                 ricomincia=True
+#                 menu(screen)
+#             if event.type==pygame.QUIT:
+#                 pygame.quit()
+#                 sys.exit
+#         clock.tick(fps)
+
 while True:
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
@@ -122,12 +139,14 @@ while True:
     ciliegia.draw(pacman)
     if pacman.rect.colliderect(ciliegia.rect):
         ciliegia.sceglirettangolo(pacman)
-    
+    else:
+        ciliegia.gameover(screen)
     for i in range(len(listapuntini)):
         listapuntini[i].collision(pacman)
-
+  
     pygame.display.update()
     clock.tick(fps)
+
 
     # gioca()
 

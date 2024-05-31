@@ -10,5 +10,4 @@ class Puntino:
 
     def collision(self, pacman):
         if pacman.rect.collidepoint(self.pos):
-            self.preso=True
-    
+            self.preso=True    
