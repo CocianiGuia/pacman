@@ -16,11 +16,11 @@ class Punti:
         self.rect = pygame.Rect(pos[0], pos[1], size[0], size[1])
 
     def draw(self):
-        self.image.fill(BLACK)
+        self.image.fill(WHITE)
 
         # l'altezza disponibile è 60
         font = pygame.font.Font(None, 65)
-        text = font.render(str(self.punti), 1, WHITE)
-        self.image.blit(text, (250, 10)) # surface e pos, quando passo un rect di esso viene comunque presa solo la posizione
+        text = font.render(str(self.punti), 1, BLACK)
+        self.image.blit(text, (620, 10)) # surface e pos, quando passo un rect di esso viene comunque presa solo la posizione
 
         self.screen.blit(self.image, self.rect)
