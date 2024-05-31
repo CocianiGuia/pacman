@@ -3,7 +3,9 @@ from pygame.locals import *
 from labirinto import Labirinto
 from pacman import PacMan
 from punteggio import Punti
-# from ciliegia import Ciliegia
+from ciliegia import Ciliegia
+from puntino import Puntino
+from random import randint
 
 BLACK=(0,0,0)
 window_width=700
@@ -15,13 +17,12 @@ screen=pygame.display.set_mode(window_size,0,32)
 pygame.display.set_caption('Pac-Man')
 
 clock= pygame.time.Clock()
-fps=15 #non velocizzare il gioco se no non funziona bene (non prende gli incroci)
+fps=30 #non velocizzare il gioco se no non funziona bene (non prende gli incroci)
 
 
 
 labirinto=Labirinto(screen)
-labirinto.draw()
-# ciliegia=Ciliegia(screen,labirinto,1)
+ciliegia=Ciliegia(screen,labirinto,labirinto.casella,1)
 
 pacman=PacMan(screen,labirinto)
 pacman.draw()
@@ -30,6 +31,7 @@ punti = Punti(screen, [0,0], [window_width, punti_h])
 
 icona=pygame.image.load("immaginimenù/icona.png")
 menu=pygame.image.load("immaginimenù/menu.png")
+listapuntini=[Puntino((x*labirinto.tile_width+10, y*labirinto.tile_height+10)) for y in range(labirinto.num_rows) for x in range(labirinto.num_cols)]
 
 # def main_menu():
 #     pygame.display.set_caption("Menu")
@@ -79,7 +81,6 @@ def menu(screen):
         clock=pygame.time.Clock()
         fps=60
         b=True
-        
         while b==True:
             lista=pygame.mouse.get_pos()
             for event in pygame.event.get():
@@ -114,12 +115,17 @@ while True:
     pacman.move()
     clock.tick(fps)   
     #screen.fill("BLACK")#per pulire lo schermo e non fare la scia 
-    labirinto.draw()
+    labirinto.draw(listapuntini)
     punti.draw()
-    # ciliegia.sceglirettangolo(pacman.rect)
+    ciliegia.sceglirettangolo(pacman.rect)
     pacman.draw(pygame.time.get_ticks())
-    # ciliegia.draw()
-        
+    ciliegia.draw(pacman)
+    if pacman.rect.colliderect(ciliegia.rect):
+        ciliegia.sceglirettangolo(pacman)
+    
+    for i in range(len(listapuntini)):
+        listapuntini[i].collision(pacman)
+
     pygame.display.update()
     clock.tick(fps)
 
