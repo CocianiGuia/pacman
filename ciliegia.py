@@ -60,7 +60,7 @@ class Ciliegia():
             if self.rect.colliderect(pacman.rect):
                 self.presa=True
                 self.sceglirettangolo(pacman, True)
-                # self.punti+=50
+                self.punti+=50
         elif not self.presa:
             gameover(self.display)
             print('x')
