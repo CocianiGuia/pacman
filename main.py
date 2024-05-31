@@ -96,21 +96,21 @@ def menu(screen):
             pygame.display.flip()
 menu(screen)
 
-game_over=pygame.image.load("./immaginimenu/immagine_gameover1.png")
-def gameover(screen):
-    screen.blit(game_over, (0,0))
-    pygame.display.update()
-    clock=pygame.time.Clock()
-    ricomincia=False
-    while not ricomincia:
-        for event in pygame.event.get():
-            if event.type==pygame.KEYDOWN and event.key==pygame.K_SPACE:
-                ricomincia=True
-                menu(screen)
-            if event.type==pygame.QUIT:
-                pygame.quit()
-                sys.exit
-        clock.tick(fps)
+# game_over=pygame.image.load("./immaginimenu/immagine_gameover1.png")
+# def gameover(screen):
+#     screen.blit(game_over, (0,0))
+#     pygame.display.update()
+#     clock=pygame.time.Clock()
+#     ricomincia=False
+#     while not ricomincia:
+#         for event in pygame.event.get():
+#             if event.type==pygame.KEYDOWN and event.key==pygame.K_SPACE:
+#                 ricomincia=True
+#                 menu(screen)
+#             if event.type==pygame.QUIT:
+#                 pygame.quit()
+#                 sys.exit
+#         clock.tick(fps)
 
 while True:
     for event in pygame.event.get():
@@ -140,13 +140,13 @@ while True:
     if pacman.rect.colliderect(ciliegia.rect):
         ciliegia.sceglirettangolo(pacman)
     else:
-        gameover(screen)
-    
+        ciliegia.gameover(screen)
     for i in range(len(listapuntini)):
         listapuntini[i].collision(pacman)
-        
+  
     pygame.display.update()
     clock.tick(fps)
+
 
     # gioca()
 

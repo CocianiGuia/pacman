@@ -27,7 +27,19 @@ class Ciliegia():
                     f=random.randint(0,len(self.labirinto.tile_liberi)-1)
                     self.rect=self.labirinto.tile_liberi[f]
                 self.durata=60
-
+    game_over=pygame.image.load("./immaginimenu/immagine_gameover1.png")
+    def gameover(screen, game_over=pygame.image.load("./immaginimenu/immagine_gameover1.png")):
+        screen.blit(game_over, (0,0))
+        pygame.display.update()
+        clock=pygame.time.Clock()
+        ricomincia=False
+        while not ricomincia:
+            for event in pygame.event.get():
+                if event.type==pygame.KEYDOWN and event.key==pygame.K_SPACE:
+                    ricomincia=True
+                if event.type==pygame.QUIT:
+                    pygame.quit()
+                    sys.exit
     def draw(self, pacman):
         if self.durata>0:
             self.display.blit(self.image,(self.rect.x,self.rect.y))
@@ -36,7 +48,7 @@ class Ciliegia():
                 self.sceglirettangolo(pacman, True)
         else:
             if not self.presa:
-                pass
+                self.gameover(self.screen)
 
 
 # class Ciliegia():
