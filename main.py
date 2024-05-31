@@ -142,7 +142,7 @@ while True:
 
 
     # gioca()
-
+#commitprova
     # while True:
         #mettere la stampa della pagina del mio menu di avvio e le funzioni(es bottoni esci e gioca)
         #quando premi il bottone gioca richiama la funzione gioca
