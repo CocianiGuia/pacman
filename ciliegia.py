@@ -16,20 +16,27 @@ class Ciliegia():
         # self.rect=self.image.get_rect()
         self.durata=0
         self.casella=casella
+        self.presa=False
 
     def sceglirettangolo(self,pacman):
             if self.durata==0:
+                self.presa=False
                 n=random.randint(0,len(self.labirinto.tile_liberi)-1)
                 self.rect=self.labirinto.tile_liberi[n]
-                while not self.rect.colliderect(pacman):
+                while self.rect.colliderect(pacman):
                     f=random.randint(0,len(self.labirinto.tile_liberi)-1)
                     self.rect=self.labirinto.tile_liberi[f]
-                self.durata=70
+                self.durata=150
 
     def draw(self):
         if self.durata>0:
             self.display.blit(self.image,(self.rect.x,self.rect.y))
             self.durata-=1
+        else:
+            if not self.presa:
+                pass
+                #gameover
+        
 
 
 # class Ciliegia():

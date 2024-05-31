@@ -1,13 +1,14 @@
 import pygame, sys
 from pygame.locals import *
 from math import ceil
+from puntino import Puntino
 
 BLACK=(0,0,0)
 BLUE=(0,0,255)
 WHITE=(255,255,255)
 
 class Labirinto():
-    def __init__(self, display, filematrice= './mappa/mappalabirinto.txt') -> None:
+    def __init__(self, display, filematrice= 'mappa/mappalabirinto.txt') -> None:
         self.display=display
         self.width=display.get_width()
         self.height=display.get_height()
@@ -17,6 +18,8 @@ class Labirinto():
         self.num_cols = len(self.game_map[0])
         self.tile_width = ceil(display.get_width() / self.num_cols)
         self.tile_height = ceil(display.get_height() / self.num_rows)
+        with open('mappa/mappalabirinto.txt', 'r', encoding='utf-8') as file:
+            self.matrice=[[el for el in riga.split()] for riga in file]
         
         self.casella=pygame.Surface((self.tile_width,self.tile_height)) #definisco la casella in cui disegno il labirinto(rettangolo) #prima lo disegnavamo volta per volta
 
@@ -42,6 +45,9 @@ class Labirinto():
                 if tile==1:
                     self.casella.fill(BLACK)
                     self.display.blit(self.casella, (x*self.tile_width, y*self.tile_height))
+                    puntino=Puntino()
+                    if not puntino.preso:
+                        Puntino().draw(self.display,(x*self.tile_width+10, y*self.tile_height+10) )
                 if tile==2:
                     self.casella.fill(WHITE)
                     self.display.blit(self.casella, (x*self.tile_width, y*self.tile_height)) 

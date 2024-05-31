@@ -4,6 +4,7 @@ from labirinto import Labirinto
 from pacman import PacMan
 from punteggio import Punti
 from ciliegia import Ciliegia
+from puntino import Puntino
 from random import randint
 
 BLACK=(0,0,0)
@@ -119,6 +120,9 @@ while True:
     ciliegia.sceglirettangolo(pacman.rect)
     pacman.draw(pygame.time.get_ticks())
     ciliegia.draw()
+    if pacman.rect.colliderect(ciliegia.rect):
+        ciliegia.sceglirettangolo(pacman)
+
     pygame.display.update()
     clock.tick(fps)
 
