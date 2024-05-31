@@ -1,3 +1,4 @@
+
 import pygame
 class Puntino:
     def __init__(self, pos) -> None:
