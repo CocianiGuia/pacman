@@ -24,7 +24,7 @@ class Punti:
 
         # l'altezza disponibile è 60
         font = pygame.font.Font(None, 65)
-        text = font.render(str(self.punti), 1, BLACK)
+        text = font.render(f'SCORE:{str(self.punti)}', 1, BLACK)
         self.image.blit(text, (350, 10)) # surface e pos, quando passo un rect di esso viene comunque presa solo la posizione
 
         self.screen.blit(self.image, self.rect)
