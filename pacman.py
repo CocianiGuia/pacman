@@ -26,7 +26,6 @@ class PacMan:
         self.moving_up=False
         self.moving_down=False
         self.vett_velocita=[0,0]
-        #self.vecchie_collisioni={'top': False, 'bottom':False, 'right':False, 'left':False}
         self.direzione="UP"  #in cui è rivolto pacman (in base a questo so di quanto girarlo quando si muove)
         self.counter=0 #contatore che dice quanto spesso deve aprire e chiudere la bocca
 
@@ -111,9 +110,3 @@ class PacMan:
             self.display.blit(pygame.transform.rotate(self.image[floor(self.counter//50)],90),(self.rect.x,self.rect.y))
         elif self.direzione=="DOWN": 
             self.display.blit(pygame.transform.rotate(self.image[floor(self.counter//50)],270),(self.rect.x,self.rect.y))
-        
-        # if self.counter<19:
-        #     self.counter+=1
-        # else:
-        #     self.counter=0
-    

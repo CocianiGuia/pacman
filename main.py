@@ -18,11 +18,10 @@ screen=pygame.display.set_mode(window_size,0,32)
 pygame.display.set_caption('Pac-Man')
 
 clock= pygame.time.Clock()
-fps=30 #non velocizzare il gioco se no non funziona bene (non prende gli incroci)
+fps=30 
 
 
 labirinto=Labirinto(screen)
-# ciliegia=Ciliegia(screen,labirinto,labirinto.casella,1, punti)
 
 pacman=PacMan(screen,labirinto)
 pacman.draw()
@@ -58,41 +57,6 @@ def menu(screen):
             screen.blit(gioca,rectbot)
             clock.tick(fps)
             pygame.display.flip()
-# menu(screen)
-
-
-# def gameover(screen):
-#     game_over=pygame.image.load("./immaginimenu/immagine_gameover1.png")
-#     screen.blit(game_over, (0,0))
-#     pygame.display.update()
-#     clock=pygame.time.Clock()
-#     ricomincia=False
-#     while not ricomincia:
-#         for event in pygame.event.get():
-#             if event.type==pygame.KEYDOWN and event.key==pygame.K_SPACE:
-#                 ricomincia=True
-#                 menu(screen)
-#             if event.type==pygame.QUIT:
-#                 pygame.quit()
-#                 sys.exit
-        # clock.tick(fps)
-
-# game_over=pygame.image.load("./immaginimenu/immagine_gameover1.png")
-# def gameover(screen):
-#     screen.blit(game_over, (0,0))
-#     pygame.display.update()
-#     clock=pygame.time.Clock()
-#     ricomincia=False
-#     while not ricomincia:
-#         for event in pygame.event.get():
-#             if event.type==pygame.KEYDOWN and event.key==pygame.K_SPACE:
-#                 ricomincia=True
-#                 menu(screen)
-#             if event.type==pygame.QUIT:
-#                 pygame.quit()
-#                 sys.exit
-#         clock.tick(fps)
-
 
 bool=True
 
@@ -115,8 +79,7 @@ while True:
     if keys[K_DOWN]:
         pacman.move_down()
     pacman.move()
-    clock.tick(fps)   
-    #screen.fill("BLACK")#per pulire lo schermo e non fare la scia 
+    clock.tick(fps)    
     labirinto.draw(listapuntini)
     punti.update(ciliegia.punti,listapuntini)
     punti.draw()
@@ -127,10 +90,6 @@ while True:
     punti.draw()
     pacman.draw(pygame.time.get_ticks())
     ciliegia.draw(pacman,punti)
-    # if pacman.rect.colliderect(ciliegia.rect):
-    #     ciliegia.sceglirettangolo(pacman)
-    # else:
-    #     ciliegia.draw(pacman,punti)
 
     for i in range(len(listapuntini)):
         listapuntini[i].collision(pacman)
@@ -139,14 +98,3 @@ while True:
   
     pygame.display.update()
     clock.tick(fps)
-
-
-    # gioca()
-#commitprova
-    # while True:
-        #mettere la stampa della pagina del mio menu di avvio e le funzioni(es bottoni esci e gioca)
-        #quando premi il bottone gioca richiama la funzione gioca
-
-    # def schermogameover(screengameover):
-    #     while True:
-    #         screengameover.fill()
