@@ -118,6 +118,7 @@ while True:
     clock.tick(fps)   
     #screen.fill("BLACK")#per pulire lo schermo e non fare la scia 
     labirinto.draw(listapuntini)
+    punti.update(ciliegia.punti,listapuntini)
     punti.draw()
     
     ciliegia.sceglirettangolo(pacman,bool)
@@ -133,7 +134,6 @@ while True:
 
     for i in range(len(listapuntini)):
         listapuntini[i].collision(pacman)
-    punti.punti+=10
     punti.draw()
     
   

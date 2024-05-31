@@ -15,12 +15,16 @@ class Punti:
         self.image = pygame.Surface(size)
         self.rect = pygame.Rect(pos[0], pos[1], size[0], size[1])
 
+    def update(self, punti_ciliegia, listapuntini):
+        l=[el for el in listapuntini if el.preso]
+        self.punti=len(l)*5+punti_ciliegia
+
     def draw(self):
         self.image.fill(WHITE)
 
         # l'altezza disponibile è 60
         font = pygame.font.Font(None, 65)
         text = font.render(str(self.punti), 1, BLACK)
-        self.image.blit(text, (620, 10)) # surface e pos, quando passo un rect di esso viene comunque presa solo la posizione
+        self.image.blit(text, (350, 10)) # surface e pos, quando passo un rect di esso viene comunque presa solo la posizione
 
         self.screen.blit(self.image, self.rect)
