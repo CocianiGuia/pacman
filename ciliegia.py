@@ -18,8 +18,8 @@ class Ciliegia():
         self.casella=casella
         self.presa=False
 
-    def sceglirettangolo(self,pacman):
-            if self.durata==0:
+    def sceglirettangolo(self,pacman, bool=False):
+            if self.durata==0 or bool:
                 self.presa=False
                 n=random.randint(0,len(self.labirinto.tile_liberi)-1)
                 self.rect=self.labirinto.tile_liberi[n]
@@ -28,10 +28,12 @@ class Ciliegia():
                     self.rect=self.labirinto.tile_liberi[f]
                 self.durata=150
 
-    def draw(self):
+    def draw(self, pacman):
         if self.durata>0:
             self.display.blit(self.image,(self.rect.x,self.rect.y))
             self.durata-=1
+            if self.rect.colliderect(pacman.rect):
+                self.sceglirettangolo(pacman, True)
         else:
             if not self.presa:
                 pass

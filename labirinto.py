@@ -35,7 +35,8 @@ class Labirinto():
         # labirinto_img = pygame.image.load('./immagini/labirintoridimensionato.png')
         # self.labirinto_img = pygame.transform.scale(labirinto_img, (display.get_width(), display.get_height()))
 
-    def draw(self):
+    def draw(self, listapuntini):
+        self.display.fill((0,0,0))
         for y, row in enumerate(self.game_map):
             for x, tile in enumerate(row):
                 if tile==0:
@@ -44,10 +45,13 @@ class Labirinto():
                     
                 if tile==1:
                     self.casella.fill(BLACK)
-                    self.display.blit(self.casella, (x*self.tile_width, y*self.tile_height))
-                    puntino=Puntino()
+                    self.display.blit(self.casella, (x*self.tile_width+10, y*self.tile_height+10))
+                    for p in listapuntini:
+                        if p.pos==(x*self.tile_width+10, y*self.tile_height+10):
+                            puntino=p
+                            break
                     if not puntino.preso:
-                        Puntino().draw(self.display,(x*self.tile_width+10, y*self.tile_height+10) )
+                        puntino.draw(self.display )
                 if tile==2:
                     self.casella.fill(WHITE)
                     self.display.blit(self.casella, (x*self.tile_width, y*self.tile_height)) 
