@@ -13,7 +13,6 @@ class Ciliegia():
         self.image=pygame.image.load('./immagini/ciliegia.png')
         self.image=pygame.transform.scale(self.image,self.size)
         self.difficolta=difficolta
-        # self.rect=self.image.get_rect()
         self.durata=0
         self.casella=casella
         self.presa=False
@@ -49,32 +48,3 @@ class Ciliegia():
         else:
             if not self.presa:
                 self.gameover(self.screen)
-
-
-# class Ciliegia():
-
-#     def __init__(self, display, labirinto, difficolta):
-#         self.display=display
-#         self.labirinto=labirinto
-#         self.size=labirinto.tile_width, labirinto.tile_height
-#         self.image=pygame.image.load('./immaginimenù/pacman_lady.png')
-#         self.image=pygame.transform.scale(self.image,self.size)
-#         self.difficolta=difficolta
-#         self.rect=[]
-#         self.durata=0
-
-#     def sceglirettangolo(self,pacman):
-#         for i in range(0,self.difficolta):
-#             if self.durata==0:
-#                 n=random.randint(0,len(self.labirinto.tile_liberi)-1)
-#                 self.rect[i]=self.labirinto.tile_liberi[n]
-#                 while self.rect.colliderect(pacman):
-#                     n=random.randint(0,len(self.labirinto.tile_liberi)-1)
-#                     self.rect[i]=self.labirinto.tile_liberi[n]
-#                 self.durata=70
-
-#     def draw(self):
-#         if self.durata>0:
-#             self.display.blit(self.image,(self.rect.x,self.rect.y))
-#             self.durata-=1
-            
