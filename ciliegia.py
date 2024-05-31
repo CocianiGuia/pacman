@@ -37,8 +37,6 @@ class Ciliegia():
         else:
             if not self.presa:
                 pass
-                #gameover
-        
 
 
 # class Ciliegia():
