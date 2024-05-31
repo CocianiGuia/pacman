@@ -12,7 +12,7 @@ BLACK=(0,0,0)
 window_width=700
 window_height=800
 window_size=(window_width,window_height)
-pygame.init() #modifica
+pygame.init()
 screen=pygame.display.set_mode(window_size,0,32)
 
 pygame.display.set_caption('Pac-Man')
