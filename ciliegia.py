@@ -4,7 +4,6 @@ from labirinto import Labirinto
 import random
 
 class Ciliegia():
-
     def __init__(self, display, labirinto, casella, difficolta):
         self.display=display
         self.labirinto=labirinto
@@ -27,7 +26,7 @@ class Ciliegia():
                     f=random.randint(0,len(self.labirinto.tile_liberi)-1)
                     self.rect=self.labirinto.tile_liberi[f]
                 self.durata=60
-    game_over=pygame.image.load("./immaginimenu/immagine_gameover1.png")
+    
     def gameover(screen, game_over=pygame.image.load("./immaginimenu/immagine_gameover1.png")):
         screen.blit(game_over, (0,0))
         pygame.display.update()
@@ -40,15 +39,22 @@ class Ciliegia():
                 if event.type==pygame.QUIT:
                     pygame.quit()
                     sys.exit
+                clock.tick(60)
+
+             
     def draw(self, pacman):
         if self.durata>0:
             self.display.blit(self.image,(self.rect.x,self.rect.y))
             self.durata-=1
             if self.rect.colliderect(pacman.rect):
                 self.sceglirettangolo(pacman, True)
-        else:
-            if not self.presa:
-                self.gameover(self.screen)
+            else:
+                pass
+        #         return True
+        #     return False
+        # # else:
+        # #     if not self.presa:
+        # #         self.gameover(self.screen)
 
 
 # class Ciliegia():
@@ -77,4 +83,3 @@ class Ciliegia():
 #         if self.durata>0:
 #             self.display.blit(self.image,(self.rect.x,self.rect.y))
 #             self.durata-=1
-            
