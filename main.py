@@ -18,7 +18,7 @@ screen=pygame.display.set_mode(window_size,0,32)
 pygame.display.set_caption('Pac-Man')
 
 clock= pygame.time.Clock()
-fps=20 #non velocizzare il gioco se no non funziona bene (non prende gli incroci)
+fps=30 #non velocizzare il gioco se no non funziona bene (non prende gli incroci)
 
 
 labirinto=Labirinto(screen)
@@ -94,6 +94,8 @@ def menu(screen):
 #         clock.tick(fps)
 
 
+bool=True
+
 menu(screen)
 while True:
     for event in pygame.event.get():
@@ -118,19 +120,20 @@ while True:
     labirinto.draw(listapuntini)
     punti.draw()
     
-    ciliegia.sceglirettangolo(pacman.rect)
+    ciliegia.sceglirettangolo(pacman,bool)
+    bool=False
     labirinto.draw(listapuntini)
     punti.draw()
     pacman.draw(pygame.time.get_ticks())
     ciliegia.draw(pacman,punti)
-    if pacman.rect.colliderect(ciliegia.rect):
-        ciliegia.sceglirettangolo(pacman)
-    else:
-        ciliegia.draw(pacman,punti)
+    # if pacman.rect.colliderect(ciliegia.rect):
+    #     ciliegia.sceglirettangolo(pacman)
+    # else:
+    #     ciliegia.draw(pacman,punti)
 
     for i in range(len(listapuntini)):
         listapuntini[i].collision(pacman)
-    # punti.punti+=10
+    punti.punti+=10
     punti.draw()
     
   

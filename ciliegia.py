@@ -8,7 +8,6 @@ def gameover(screen):
     screen.fill((0,0,0))
     screen.blit(game_over, (0,0))
     pygame.display.update()
-    clock=pygame.time.Clock()
     ricomincia=False
     while not ricomincia:
         for event in pygame.event.get():
@@ -17,8 +16,7 @@ def gameover(screen):
                 # menu(screen)
             if event.type==pygame.QUIT:
                 pygame.quit()
-                sys.exit
-        clock.tick(60)
+                sys.exit()
 
 
 class Ciliegia():
@@ -32,12 +30,12 @@ class Ciliegia():
         self.punti=punti
         self.punti=0
         # self.rect=self.image.get_rect()
-        self.durata=0
+        self.durata=1
         self.casella=casella
         self.presa=False
 
     def sceglirettangolo(self,pacman, bool=False):
-            if self.durata==0 or bool:
+            if self.durata==0 and self.presa:
                 self.presa=False
                 n=random.randint(0,len(self.labirinto.tile_liberi)-1)
                 self.rect=self.labirinto.tile_liberi[n]
@@ -45,16 +43,27 @@ class Ciliegia():
                     f=random.randint(0,len(self.labirinto.tile_liberi)-1)
                     self.rect=self.labirinto.tile_liberi[f]
                 self.durata=60
+            if bool:
+                self.presa=False
+                n=random.randint(0,len(self.labirinto.tile_liberi)-1)
+                self.rect=self.labirinto.tile_liberi[n]
+                while self.rect.colliderect(pacman):
+                    f=random.randint(0,len(self.labirinto.tile_liberi)-1)
+                    self.rect=self.labirinto.tile_liberi[f]
+                self.durata=60
+
          
     def draw(self, pacman, punti):
         if self.durata>0:
             self.display.blit(self.image,(self.rect.x,self.rect.y))
             self.durata-=1
             if self.rect.colliderect(pacman.rect):
+                self.presa=True
                 self.sceglirettangolo(pacman, True)
                 # self.punti+=50
-        elif pygame.time.get_ticks()>5000:
+        elif not self.presa:
             gameover(self.display)
+            print('x')
         #         return True
         #     return False
         # # else:
