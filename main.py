@@ -77,6 +77,7 @@ def menu(screen):
         clock=pygame.time.Clock()
         fps=60
         b=True
+        
         while b==True:
             lista=pygame.mouse.get_pos()
             for event in pygame.event.get():
