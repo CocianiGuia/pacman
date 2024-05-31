@@ -1,13 +1,15 @@
 import pygame, sys
 from pygame.locals import *
+from punteggio import Punti
 from labirinto import Labirinto
 from pacman import PacMan
 from punteggio import Punti
 # from ciliegia import Ciliegia
 
+WHITE=(255,255,255)
 BLACK=(0,0,0)
-window_width=700
-window_height=800
+window_width=600
+window_height=700
 window_size=(window_width,window_height)
 pygame.init() #modifica
 screen=pygame.display.set_mode(window_size,0,32)
@@ -95,13 +97,18 @@ def gioca():
         pacman.draw(pygame.time.get_ticks())
         # ciliegia.draw()
         pygame.display.flip()
-        clock.tick(fps)
+
+    pygame.quit()
 
 gioca()
-
+# sincr
 # while True:
     #mettere la stampa della pagina del mio menu di avvio e le funzioni(es bottoni esci e gioca)
     #quando premi il bottone gioca richiama la funzione gioca
+# if __name__ == "__main__":
+#     menu_iniziale()
+#     gioca()
+
 
 # def schermogameover(screengameover):
 #     while True:
