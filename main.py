@@ -3,7 +3,8 @@ from pygame.locals import *
 from labirinto import Labirinto
 from pacman import PacMan
 from punteggio import Punti
-# from ciliegia import Ciliegia
+from ciliegia import Ciliegia
+from random import randint
 
 BLACK=(0,0,0)
 window_width=700
@@ -21,7 +22,7 @@ fps=15 #non velocizzare il gioco se no non funziona bene (non prende gli incroci
 
 labirinto=Labirinto(screen)
 labirinto.draw()
-# ciliegia=Ciliegia(screen,labirinto,1)
+ciliegia=Ciliegia(screen,labirinto,labirinto.casella,1)
 
 pacman=PacMan(screen,labirinto)
 pacman.draw()
@@ -115,10 +116,9 @@ while True:
     #screen.fill("BLACK")#per pulire lo schermo e non fare la scia 
     labirinto.draw()
     punti.draw()
-    # ciliegia.sceglirettangolo(pacman.rect)
+    ciliegia.sceglirettangolo(pacman.rect)
     pacman.draw(pygame.time.get_ticks())
-    # ciliegia.draw()
-        
+    ciliegia.draw()
     pygame.display.update()
     clock.tick(fps)
 
