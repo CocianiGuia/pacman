@@ -7,6 +7,7 @@ from ciliegia import Ciliegia
 from puntino import Puntino
 from random import randint
 
+WHITE=(255,255,255)
 BLACK=(0,0,0)
 window_width=700
 window_height=800
@@ -20,63 +21,26 @@ clock= pygame.time.Clock()
 fps=30 #non velocizzare il gioco se no non funziona bene (non prende gli incroci)
 
 
-
 labirinto=Labirinto(screen)
-ciliegia=Ciliegia(screen,labirinto,labirinto.casella,1)
+# ciliegia=Ciliegia(screen,labirinto,labirinto.casella,1, punti)
 
 pacman=PacMan(screen,labirinto)
 pacman.draw()
 punti_h = 60
 punti = Punti(screen, [0,0], [window_width, punti_h])
+ciliegia=Ciliegia(screen,labirinto,labirinto.casella,punti)
 
 icona=pygame.image.load("immaginimenu/icona.png")
 menu=pygame.image.load("immaginimenu/menu.png")
 listapuntini=[Puntino((x*labirinto.tile_width+10, y*labirinto.tile_height+10)) for y in range(labirinto.num_rows) for x in range(labirinto.num_cols)]
 
-# def main_menu():
-#     pygame.display.set_caption("Menu")
-
-#     while True:
-#         screen.blit(home,(0,0))
-
-#         menu_mouse_pos=pygame.mouse.get_pos()
-#         menu_text=font.render("START", True, WHITE)
-#         menu_rect=menu_text.get_rect(center=)
-
-# def draw_game():
-#     pass
-
-# def draw_menu():
-#     bottone=pygame.draw.rect(screen,WHITE, [230,450, 260, 40],0,5)
-#     pygame.draw.rect(screen, WHITE, [230,450,260,40], 5,5)
-#     text=pygame.font.Font('START', 1, WHITE) 
-#     screen.blit(text, (245, 457))
-   
-    
-
-# def gioca(): 
-# def menu_iniziale():
-#     intro=True:
-#     while intro:
-#         for event in pygame.event.get():
-#             if event.type == QUIT:
-#                 pygame.quit()
-#                 sys.exit()
-#             if event.type==pygame.MOUSEBUTTONDOWN:
-#                 if button_rect.collidepoint(event.pos):
-#                     print("PACMAN")
-        
-#         screen.fill(BLACK)
-
-#         draw_text('START', font, BLACK, screen, 1100//2, )
 
 
-# def gioca(): 
 def menu(screen):
-        screen.fill("black")
+        screen.fill(BLACK)
         icona_bottone=icona.get_rect(center=(350, 300))
         font=pygame.font.Font(None, 70)
-        gioca=font.render("START", True, "white", None)
+        gioca=font.render("START", True, WHITE, None)
         rectbot=gioca.get_rect(center=(350,550))
         clock=pygame.time.Clock()
         fps=60
@@ -94,7 +58,24 @@ def menu(screen):
             screen.blit(gioca,rectbot)
             clock.tick(fps)
             pygame.display.flip()
-menu(screen)
+# menu(screen)
+
+
+# def gameover(screen):
+#     game_over=pygame.image.load("./immaginimenu/immagine_gameover1.png")
+#     screen.blit(game_over, (0,0))
+#     pygame.display.update()
+#     clock=pygame.time.Clock()
+#     ricomincia=False
+#     while not ricomincia:
+#         for event in pygame.event.get():
+#             if event.type==pygame.KEYDOWN and event.key==pygame.K_SPACE:
+#                 ricomincia=True
+#                 menu(screen)
+#             if event.type==pygame.QUIT:
+#                 pygame.quit()
+#                 sys.exit
+        # clock.tick(fps)
 
 # game_over=pygame.image.load("./immaginimenu/immagine_gameover1.png")
 # def gameover(screen):
@@ -112,6 +93,10 @@ menu(screen)
 #                 sys.exit
 #         clock.tick(fps)
 
+
+bool=True
+
+menu(screen)
 while True:
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
@@ -133,16 +118,24 @@ while True:
     clock.tick(fps)   
     #screen.fill("BLACK")#per pulire lo schermo e non fare la scia 
     labirinto.draw(listapuntini)
+    punti.update(ciliegia.punti,listapuntini)
     punti.draw()
-    ciliegia.sceglirettangolo(pacman.rect)
+    
+    ciliegia.sceglirettangolo(pacman,bool)
+    bool=False
+    labirinto.draw(listapuntini)
+    punti.draw()
     pacman.draw(pygame.time.get_ticks())
-    ciliegia.draw(pacman)
-    if pacman.rect.colliderect(ciliegia.rect):
-        ciliegia.sceglirettangolo(pacman)
-    else:
-        ciliegia.gameover(screen)
+    ciliegia.draw(pacman,punti)
+    # if pacman.rect.colliderect(ciliegia.rect):
+    #     ciliegia.sceglirettangolo(pacman)
+    # else:
+    #     ciliegia.draw(pacman,punti)
+
     for i in range(len(listapuntini)):
         listapuntini[i].collision(pacman)
+    punti.draw()
+    
   
     pygame.display.update()
     clock.tick(fps)
