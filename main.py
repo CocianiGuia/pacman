@@ -21,6 +21,8 @@ labirinto=Labirinto(screen)
 labirinto.draw()
 # ciliegia=Ciliegia(screen,labirinto,1)
 
+
+
 pacman=PacMan(screen,labirinto)
 pacman.draw()
 punti_h = 60
