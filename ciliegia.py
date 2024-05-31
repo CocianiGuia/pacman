@@ -5,6 +5,7 @@ import random
 
 def gameover(screen):
     game_over=pygame.image.load("./immaginimenu/immagine_gameover1.png")
+    screen.fill((0,0,0))
     screen.blit(game_over, (0,0))
     pygame.display.update()
     clock=pygame.time.Clock()
@@ -44,7 +45,6 @@ class Ciliegia():
                     f=random.randint(0,len(self.labirinto.tile_liberi)-1)
                     self.rect=self.labirinto.tile_liberi[f]
                 self.durata=60
-    
          
     def draw(self, pacman, punti):
         if self.durata>0:
@@ -53,8 +53,8 @@ class Ciliegia():
             if self.rect.colliderect(pacman.rect):
                 self.sceglirettangolo(pacman, True)
                 # self.punti+=50
-            else:
-                self.gameover(self.display)
+        elif pygame.time.get_ticks()>5000:
+            gameover(self.display)
         #         return True
         #     return False
         # # else:
