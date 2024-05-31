@@ -28,7 +28,7 @@ pacman=PacMan(screen,labirinto)
 pacman.draw()
 punti_h = 60
 punti = Punti(screen, [0,0], [window_width, punti_h])
-ciliegia=Ciliegia(screen,labirinto,labirinto.casella,1, punti)
+ciliegia=Ciliegia(screen,labirinto,labirinto.casella,punti)
 
 icona=pygame.image.load("immaginimenu/icona.png")
 menu=pygame.image.load("immaginimenu/menu.png")
@@ -117,11 +117,15 @@ while True:
     #screen.fill("BLACK")#per pulire lo schermo e non fare la scia 
     labirinto.draw(listapuntini)
     punti.draw()
+    
     ciliegia.sceglirettangolo(pacman.rect)
     pacman.draw(pygame.time.get_ticks())
-    ciliegia.draw(pacman, punti)
+    ciliegia.draw(pacman,punti)
     if pacman.rect.colliderect(ciliegia.rect):
         ciliegia.sceglirettangolo(pacman)
+    else:
+        screen.fill(BLACK)
+        ciliegia.draw()
 
     for i in range(len(listapuntini)):
         listapuntini[i].collision(pacman)
